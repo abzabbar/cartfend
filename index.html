@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CartFend — All-in-One WooCommerce Fraud Shield &amp; Conversion Suite</title>
+    <meta name="description" content="Stop fake COD orders, block repeat fraudsters with device fingerprinting, recover abandoned carts via WhatsApp, sync couriers, and filter Meta CAPI.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #070d19;
+            --navy: #0f172a;
+            --slate: #1e293b;
+            --green: #16a34a;
+            --green-glow: #22c55e;
+            --green-dark: #15803d;
+            --text: #334155;
+            --muted: #64748b;
+            --surface: #f8fafc;
+            --border: #e2e8f0;
+            --radius: 14px;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text);
+            background: #ffffff;
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+        h1, h2, h3, h4, .brand-text {
+            font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+            letter-spacing: -0.025em;
+        }
+        .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+        /* Sticky Frosted Header */
+        header {
+            background: rgba(7, 13, 25, 0.88);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .nav-wrap {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 72px;
+        }
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 21px;
+            font-weight: 800;
+        }
+        .brand-text span { color: var(--green-glow); }
+        .nav-links { display: flex; align-items: center; gap: 28px; }
+        .nav-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.15s ease;
+        }
+        .nav-links a:hover { color: #ffffff; }
+        .nav-cta {
+            background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
+            color: #ffffff !important;
+            padding: 10px 18px;
+            border-radius: 9px;
+            font-weight: 600 !important;
+            box-shadow: 0 4px 14px rgba(34, 197, 94, 0.28);
+            transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+        }
+        .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(34, 197, 94, 0.38); }
+        .mobile-toggle {
+            display: none;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.14);
+            color: #fff;
+            padding: 7px 11px;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        /* Hero Section with Radial Mesh + Tech Grid */
+        .hero {
+            position: relative;
+            background: var(--bg-dark);
+            color: #ffffff;
+            padding: 84px 0 92px;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(circle at 75% 25%, rgba(22, 163, 74, 0.22), transparent 45%),
+                radial-gradient(circle at 15% 75%, rgba(14, 165, 233, 0.14), transparent 40%),
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 42px 42px, 42px 42px;
+            pointer-events: none;
+        }
+        .hero-grid {
+            position: relative;
+            display: grid;
+            grid-template-columns: 1.12fr 0.88fr;
+            gap: 48px;
+            align-items: center;
+        }
+        .hero-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(34, 197, 94, 0.12);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            color: #4ade80;
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-size: 12.5px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        .hero h1 {
+            font-size: clamp(32px, 4.4vw, 50px);
+            line-height: 1.14;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+        .hero h1 span {
+            background: linear-gradient(90deg, #4ade80, #38bdf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-sub {
+            font-size: 16.5px;
+            color: #cbd5e1;
+            margin-bottom: 30px;
+            max-width: 560px;
+        }
+        .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 32px; }
+        .btn-primary {
+            background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
+            color: #ffffff;
+            padding: 14px 26px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 15px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 8px 24px rgba(22, 163, 74, 0.32);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(22, 163, 74, 0.42); }
+        .btn-ghost {
+            background: rgba(255, 255, 255, 0.06);
+            color: #f8fafc;
+            padding: 14px 24px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 15px;
+            text-decoration: none;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            transition: background 0.15s ease;
+        }
+        .btn-ghost:hover { background: rgba(255, 255, 255, 0.12); }
+        .hero-trust {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+            font-size: 13px;
+            color: #94a3b8;
+        }
+        .hero-trust span { display: inline-flex; align-items: center; gap: 6px; }
+
+        /* Hero SaaS Mockup Card */
+        .hero-mockup {
+            background: rgba(15, 23, 42, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 18px;
+            padding: 22px;
+            box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(12px);
+        }
+        .mock-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 14px;
+            margin-bottom: 16px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .mock-dots { display: flex; gap: 6px; }
+        .mock-dots i { width: 10px; height: 10px; border-radius: 50%; display: block; }
+        .mock-status { font-size: 11.5px; font-weight: 600; color: #4ade80; background: rgba(34,197,94,0.14); padding: 3px 10px; border-radius: 999px; }
+        .mock-stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+        .mock-stat {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 12px;
+            padding: 14px;
+        }
+        .mock-stat small { display: block; font-size: 11px; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.4px; }
+        .mock-stat strong { font-size: 22px; color: #fff; font-family: 'Plus Jakarta Sans', sans-serif; }
+        .mock-log {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 10px;
+            padding: 11px 13px;
+            margin-top: 9px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12.5px;
+        }
+        .pill-red { background: rgba(239,68,68,0.18); color: #fca5a5; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 600; }
+        .pill-green { background: rgba(34,197,94,0.18); color: #86efac; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 600; }
+        .pill-blue { background: rgba(56,189,248,0.18); color: #7dd3fc; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 600; }
+
+        /* Sections */
+        .section { padding: 84px 0; }
+        .section-surface { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+        .sec-head { text-align: center; max-width: 660px; margin: 0 auto 52px; }
+        .sec-kicker {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--green);
+            margin-bottom: 8px;
+        }
+        .sec-head h2 { font-size: clamp(26px, 3.2vw, 36px); color: var(--navy); font-weight: 800; margin-bottom: 12px; }
+        .sec-head p { color: var(--muted); font-size: 16px; }
+
+        /* Feature Cards */
+        .feat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(265px, 1fr)); gap: 22px; }
+        .feat-card {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 26px;
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .feat-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(22, 163, 74, 0.45);
+            box-shadow: 0 16px 30px -12px rgba(15, 23, 42, 0.1);
+        }
+        .feat-icon-box {
+            width: 46px;
+            height: 46px;
+            border-radius: 12px;
+            background: #f0fdf4;
+            border: 1px solid #dcfce7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin-bottom: 16px;
+        }
+        .feat-card h3 { font-size: 17px; color: var(--navy); font-weight: 700; margin-bottom: 8px; }
+        .feat-card p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+        /* Currency Toggle & Pricing */
+        .currency-toggle-wrap { display: flex; justify-content: center; margin-bottom: 38px; }
+        .currency-switch {
+            display: inline-flex;
+            background: #f1f5f9;
+            padding: 5px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+        .curr-btn {
+            border: none;
+            background: transparent;
+            padding: 9px 18px;
+            border-radius: 8px;
+            font-size: 13.5px;
+            font-weight: 600;
+            color: var(--muted);
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .curr-btn.is-active {
+            background: var(--navy);
+            color: #ffffff;
+            box-shadow: 0 2px 8px rgba(15, 23, 42, 0.15);
+        }
+
+        .price-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 26px; align-items: stretch; }
+        .price-card {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 34px 28px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            transition: box-shadow 0.2s ease;
+        }
+        .price-card:hover { box-shadow: 0 18px 36px -14px rgba(15, 23, 42, 0.12); }
+        .price-card.featured {
+            border: 2px solid var(--green);
+            box-shadow: 0 22px 45px -15px rgba(22, 163, 74, 0.2);
+        }
+        .pop-badge {
+            position: absolute;
+            top: -13px;
+            right: 24px;
+            background: linear-gradient(135deg, #16a34a, #22c55e);
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 999px;
+            letter-spacing: 0.5px;
+        }
+        .plan-name { font-size: 19px; font-weight: 700; color: var(--navy); }
+        .plan-desc { font-size: 13.5px; color: var(--muted); margin-top: 4px; }
+        .plan-price {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 44px;
+            font-weight: 800;
+            color: var(--navy);
+            margin: 18px 0 4px;
+            line-height: 1;
+        }
+        .plan-price span { font-size: 14px; font-weight: 600; color: var(--green); }
+        .plan-alt-price { font-size: 13px; color: var(--muted); margin-bottom: 22px; }
+        .plan-features { list-style: none; margin-bottom: 28px; flex-grow: 1; }
+        .plan-features li {
+            padding: 8px 0;
+            font-size: 14px;
+            border-bottom: 1px solid #f1f5f9;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .pay-actions { display: flex; flex-direction: column; gap: 10px; }
+        .btn-global {
+            background: var(--navy);
+            color: #ffffff;
+            padding: 13px 16px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            text-align: center;
+            transition: background 0.15s ease;
+        }
+        .btn-global:hover { background: var(--slate); }
+        .btn-bd {
+            background: #e11d48;
+            color: #ffffff;
+            padding: 13px 16px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            transition: background 0.15s ease;
+        }
+        .btn-bd:hover { background: #be123c; }
+
+        /* FAQ */
+        .faq-list { max-width: 780px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
+        .faq-item {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px 24px;
+        }
+        .faq-item h3 { font-size: 16px; color: var(--navy); margin-bottom: 6px; }
+        .faq-item p { font-size: 14px; color: var(--muted); }
+
+        /* Professional Footer */
+        footer {
+            background: var(--bg-dark);
+            color: #94a3b8;
+            padding: 56px 0 32px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.6fr 1fr 1fr 1fr;
+            gap: 32px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .footer-col h4 { color: #ffffff; font-size: 14px; margin-bottom: 14px; }
+        .footer-col ul { list-style: none; }
+        .footer-col li { margin-bottom: 9px; font-size: 13.5px; }
+        .footer-col a { color: #94a3b8; text-decoration: none; cursor: pointer; }
+        .footer-col a:hover { color: #ffffff; }
+        .footer-bottom {
+            padding-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: 13px;
+        }
+
+        /* Ultra-Professional Modals */
+        .cf-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(7, 13, 25, 0.72);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 16px;
+        }
+        .cf-modal-box {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            max-width: 480px;
+            width: 100%;
+            padding: 28px;
+            position: relative;
+            box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.45);
+            animation: cfPopIn 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+            max-height: 92vh;
+            overflow-y: auto;
+        }
+        .cf-modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: none;
+            background: #f1f5f9;
+            color: #475569;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .cf-modal-close:hover { background: #e2e8f0; color: var(--navy); }
+        .wallet-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 14px 0; }
+        .wallet-tab {
+            border: 1.5px solid var(--border);
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 10px 8px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .wallet-tab.is-active[data-wallet="bKash"] { border-color: #e2136e; background: #fdf2f8; color: #be185d; }
+        .wallet-tab.is-active[data-wallet="Nagad"] { border-color: #f97316; background: #fff7ed; color: #c2410c; }
+        .wallet-tab.is-active[data-wallet="Rocket"] { border-color: #8b5cf6; background: #f5f3ff; color: #6d28d9; }
+
+        .wallet-info-card {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 14px 16px;
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+        .copy-btn {
+            background: var(--navy);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 7px 12px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .cf-field { margin-bottom: 13px; }
+        .cf-field label { display: block; font-size: 12.5px; font-weight: 600; color: var(--navy); margin-bottom: 5px; }
+        .cf-field input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 9px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+        .cf-field input:focus { outline: none; border-color: var(--green); box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.14); }
+        .cf-inline-error {
+            display: none;
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #b91c1c;
+            padding: 9px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            margin-bottom: 12px;
+        }
+
+        /* Toast Notification */
+        .cf-toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: var(--navy);
+            color: #ffffff;
+            padding: 12px 18px;
+            border-radius: 10px;
+            font-size: 13.5px;
+            font-weight: 600;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+            z-index: 99999;
+            display: none;
+        }
+
+        @keyframes cfPopIn {
+            from { opacity: 0; transform: scale(0.94) translateY(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        @media (max-width: 900px) {
+            .hero-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 640px) {
+            .nav-links { display: none; }
+            .nav-links.is-open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 72px;
+                left: 0;
+                right: 0;
+                background: var(--bg-dark);
+                padding: 20px;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+            .mobile-toggle { display: block; }
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container nav-wrap">
+        <a href="#" class="brand">
+            <svg width="32" height="32" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect width="36" height="36" rx="9" fill="#16a34a"/>
+                <path d="M18 6L28 10.2V17.6C28 23.8 23.7 29.1 18 30.8C12.3 29.1 8 23.8 8 17.6V10.2L18 6Z" fill="#0f172a"/>
+                <path d="M14 18.2L16.8 21L22.5 14.8" stroke="#4ade80" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="brand-text">Cart<span>Fend</span></span>
+        </a>
+        <button type="button" class="mobile-toggle" onclick="toggleMobileMenu()" aria-label="Menu">&#9776;</button>
+        <nav id="mainNav" class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#faq">FAQ</a>
+            <a href="#pricing" class="nav-cta">Get Lifetime Deal</a>
+        </nav>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="container hero-grid">
+        <div>
+            <div class="hero-pill">⚡ WooCommerce HPOS &amp; Block Checkout Ready</div>
+            <h1>Stop Fake COD Orders &amp; <span>Boost Store Revenue</span> Automatically</h1>
+            <p class="hero-sub">The all-in-one lightweight WooCommerce suite with Smart Risk Scoring, Auto COD Blocker, Device Fingerprinting, 1-Click WhatsApp Lead Recovery, Multi-Courier Sync &amp; Filtered Meta CAPI.</p>
+            <div class="hero-actions">
+                <a href="#pricing" class="btn-primary">Get Lifetime Deal — From $29</a>
+                <a href="#features" class="btn-ghost">Explore 8 Pro Modules</a>
+            </div>
+            <div class="hero-trust">
+                <span>✓ Zero Frontend Bloat</span>
+                <span>✓ Works Worldwide + Bangladesh</span>
+                <span>✓ Lifetime Updates</span>
+            </div>
+        </div>
+
+        <div class="hero-mockup" aria-hidden="true">
+            <div class="mock-top">
+                <div class="mock-dots">
+                    <i style="background:#ef4444;"></i>
+                    <i style="background:#f59e0b;"></i>
+                    <i style="background:#22c55e;"></i>
+                </div>
+                <span class="mock-status">● Shield Active — v1.0.0</span>
+            </div>
+            <div class="mock-stat-row">
+                <div class="mock-stat">
+                    <small>Fake Orders Blocked</small>
+                    <strong>142</strong>
+                </div>
+                <div class="mock-stat">
+                    <small>Leads Recovered</small>
+                    <strong style="color:#4ade80;">$3,840</strong>
+                </div>
+            </div>
+            <div class="mock-log">
+                <span>📱 01700***099 (82% Risk)</span>
+                <span class="pill-red">COD Hidden</span>
+            </div>
+            <div class="mock-log">
+                <span>💬 Abandoned Cart Lead</span>
+                <span class="pill-green">Recovered via WhatsApp</span>
+            </div>
+            <div class="mock-log">
+                <span>📦 Parcel #CF48219</span>
+                <span class="pill-blue">Auto-Synced Delivered</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="features" class="section section-surface">
+    <div class="container">
+        <div class="sec-head">
+            <span class="sec-kicker">All-in-One Powerhouse</span>
+            <h2>8 High-Impact Modules in One Fast Plugin</h2>
+            <p>Stop paying for 6 separate heavy plugins. CartFend protects your checkout and multiplies your profit margin.</p>
+        </div>
+        <div class="feat-grid">
+            <div class="feat-card">
+                <div class="feat-icon-box">🛡️</div>
+                <h3>Smart Risk-Based COD Blocker</h3>
+                <p>Calculates 0–100% risk scores and hides Cash on Delivery for risky buyers or orders above your max COD amount limit.</p>
+            </div>
+            <div class="feat-card">
+                <div class="feat-icon-box">🔍</div>
+                <h3>Browser Fingerprinting Guard</h3>
+                <p>Generates unique device hardware IDs to stop repeat fake orders—even if attackers switch SIM cards or use a VPN.</p>
+            </div>
+            <div class="feat-card">
+                <div class="feat-icon-box">💬</div>
+                <h3>1-Click WhatsApp Recovery</h3>
+                <p>Captures incomplete checkouts live with worldwide country-code support and 1-click Excel/CSV lead export.</p>
+            </div>
+            <div class="feat-card">
+                <div class="feat-icon-box">🚚</div>
+                <h3>Multi-Courier Sync &amp; Webhook</h3>
+                <p>1-click parcel booking for Steadfast, Pathao, RedX &amp; Global Webhooks (DHL/FedEx/Zapier) with auto Completed/Returned status.</p>
+            </div>
+            <div class="feat-card">
+                <div class="feat-icon-box">⚡</div>
+                <h3>Checkout Quantity Bump</h3>
+                <p>Boost Average Order Value by 20–30% with a 1-click "+1 Quantity &amp; Instant Discount" offer right inside checkout.</p>
+            </div>
+            <div class="feat-card">
+                <div class="feat-icon-box">🚫</div>
+                <h3>Fake Address &amp; Phone Guard</h3>
+                <p>Blocks gibberish addresses (English &amp; Bengali), enforces 11-digit BD/global numbers, and shows a sleek duplicate warning modal.</p>
+            </div>
+            <div class="feat-card">
+                <div class="feat-icon-box">📊</div>
+                <h3>Filtered Facebook Pixel &amp; CAPI</h3>
+                <p>Fires Purchase events asynchronously via Action Scheduler ONLY for verified low-risk orders to keep your ROAS clean.</p>
+            </div>
+            <div class="feat-card">
+                <div class="feat-icon-box">🚀</div>
+                <h3>Zero-Bloat SaaS Architecture</h3>
+                <p>Zero CSS/JS loaded on Shop or Home pages. Full WooCommerce HPOS, Classic Checkout, and Block Checkout compatibility.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="pricing" class="section">
+    <div class="container">
+        <div class="sec-head">
+            <span class="sec-kicker">Limited Launch Offer</span>
+            <h2>Pay Once. Own CartFend Forever.</h2>
+            <p>Lock in Lifetime Access with all 8 modules and lifetime updates. Zero monthly subscriptions.</p>
+        </div>
+
+        <div class="currency-toggle-wrap">
+            <div class="currency-switch">
+                <button type="button" class="curr-btn is-active" onclick="setCurrency('USD', this)">🌍 Global USD ($)</button>
+                <button type="button" class="curr-btn" onclick="setCurrency('BDT', this)">🇧🇩 Bangladesh BDT (৳)</button>
+            </div>
+        </div>
+
+        <div class="price-grid">
+            <div class="price-card">
+                <div class="plan-name">Starter Lifetime</div>
+                <div class="plan-desc">Perfect for single store owners</div>
+                <div class="plan-price" data-usd="$29" data-bdt="৳3,500">$29 <span>/ Lifetime</span></div>
+                <div class="plan-alt-price" data-usd="🇧🇩 BD Equivalent: ~৳3,500" data-bdt="🌍 Global Price: $29 USD">🇧🇩 BD Equivalent: ~৳3,500</div>
+                <ul class="plan-features">
+                    <li>✅ <strong>1 Website</strong> Activation</li>
+                    <li>✅ All 8 Pro Modules Unlocked</li>
+                    <li>✅ Lifetime Updates &amp; Bug Fixes</li>
+                    <li>✅ HPOS &amp; Block Checkout Ready</li>
+                    <li>✅ Email &amp; WhatsApp Support</li>
+                </ul>
+                <div class="pay-actions">
+                    <a id="ls-link-1" href="#" class="btn-global" target="_blank">💳 Pay Globally (Card / PayPal)</a>
+                    <button type="button" class="btn-bd" onclick="openBdModal('Starter (1 Site Lifetime)', '$29 / ৳3,500')">🇧🇩 Pay via bKash / Nagad / Rocket</button>
+                </div>
+            </div>
+
+            <div class="price-card featured">
+                <div class="pop-badge">BEST VALUE</div>
+                <div class="plan-name">Business Lifetime</div>
+                <div class="plan-desc">Ideal for growing multi-store brands</div>
+                <div class="plan-price" data-usd="$49" data-bdt="৳5,900">$49 <span>/ Lifetime</span></div>
+                <div class="plan-alt-price" data-usd="🇧🇩 BD Equivalent: ~৳5,900" data-bdt="🌍 Global Price: $49 USD">🇧🇩 BD Equivalent: ~৳5,900</div>
+                <ul class="plan-features">
+                    <li>✅ <strong>5 Websites</strong> Activation</li>
+                    <li>✅ All 8 Pro Modules Unlocked</li>
+                    <li>✅ Lifetime Updates &amp; Bug Fixes</li>
+                    <li>✅ HPOS &amp; Block Checkout Ready</li>
+                    <li>✅ Priority Setup Assistance</li>
+                </ul>
+                <div class="pay-actions">
+                    <a id="ls-link-5" href="#" class="btn-global" target="_blank">💳 Pay Globally (Card / PayPal)</a>
+                    <button type="button" class="btn-bd" onclick="openBdModal('Business (5 Sites Lifetime)', '$49 / ৳5,900')">🇧🇩 Pay via bKash / Nagad / Rocket</button>
+                </div>
+            </div>
+
+            <div class="price-card">
+                <div class="plan-name">Agency Lifetime</div>
+                <div class="plan-desc">Built for WordPress agencies &amp; freelancers</div>
+                <div class="plan-price" data-usd="$89" data-bdt="৳10,700">$89 <span>/ Lifetime</span></div>
+                <div class="plan-alt-price" data-usd="🇧🇩 BD Equivalent: ~৳10,700" data-bdt="🌍 Global Price: $89 USD">🇧🇩 BD Equivalent: ~৳10,700</div>
+                <ul class="plan-features">
+                    <li>✅ <strong>20 Websites</strong> Activation</li>
+                    <li>✅ Client Site Commercial Rights</li>
+                    <li>✅ All 8 Pro Modules Unlocked</li>
+                    <li>✅ VIP Priority Support</li>
+                    <li>✅ Early Access to New Features</li>
+                </ul>
+                <div class="pay-actions">
+                    <a id="ls-link-20" href="#" class="btn-global" target="_blank">💳 Pay Globally (Card / PayPal)</a>
+                    <button type="button" class="btn-bd" onclick="openBdModal('Agency (20 Sites Lifetime)', '$89 / ৳10,700')">🇧🇩 Pay via bKash / Nagad / Rocket</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="faq" class="section section-surface">
+    <div class="container">
+        <div class="sec-head">
+            <span class="sec-kicker">Got Questions?</span>
+            <h2>Frequently Asked Questions</h2>
+        </div>
+        <div class="faq-list">
+            <div class="faq-item">
+                <h3>Will CartFend slow down my website?</h3>
+                <p>No. CartFend loads zero scripts or styles on your Homepage, Shop, or Product pages, and runs Meta CAPI asynchronously via Action Scheduler.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Does CartFend work outside Bangladesh?</h3>
+                <p>Yes! It supports international E.164 phone formatting, store-history risk scoring, worldwide WhatsApp links, Filtered CAPI, and Universal Custom Courier Webhooks for DHL, FedEx, Aramex, Shiprocket, Zapier, and more.</p>
+            </div>
+            <div class="faq-item">
+                <h3>How do I receive the plugin after paying via bKash, Nagad, or Rocket?</h3>
+                <p>Simply send the payment and submit your TrxID in the popup form—our team verifies it within minutes and sends your plugin zip and license key directly to your Email &amp; WhatsApp.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <a href="#" class="brand" style="margin-bottom:12px;">
+                    <svg width="28" height="28" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <rect width="36" height="36" rx="9" fill="#16a34a"/>
+                        <path d="M18 6L28 10.2V17.6C28 23.8 23.7 29.1 18 30.8C12.3 29.1 8 23.8 8 17.6V10.2L18 6Z" fill="#0f172a"/>
+                        <path d="M14 18.2L16.8 21L22.5 14.8" stroke="#4ade80" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span class="brand-text">Cart<span>Fend</span></span>
+                </a>
+                <p style="font-size:13.5px;max-width:300px;">Lightweight, HPOS-ready WooCommerce fraud protection, courier automation, and conversion suite for stores worldwide.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Product</h4>
+                <ul>
+                    <li><a href="#features">All Features</a></li>
+                    <li><a href="#pricing">Lifetime Pricing</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a onclick="openLegalModal('privacy')">Privacy Policy</a></li>
+                    <li><a onclick="openLegalModal('terms')">Terms of Service</a></li>
+                    <li><a onclick="openLegalModal('refund')">7-Day Refund Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="mailto:support@cartfend.com">support@cartfend.com</a></li>
+                    <li><a id="footerWaLink" href="#" target="_blank">WhatsApp Live Desk</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2026 CartFend. All rights reserved.</span>
+            <span>Built for WooCommerce &amp; HPOS</span>
+        </div>
+    </div>
+</footer>
+
+<!-- Pro Bangladesh Payment Modal -->
+<div id="bdModal" class="cf-modal-overlay" role="dialog" aria-modal="true">
+    <div class="cf-modal-box">
+        <button type="button" class="cf-modal-close" onclick="closeModal('bdModal')" aria-label="Close">&times;</button>
+        <h3 style="color:var(--navy);font-size:20px;margin-bottom:4px;">🇧🇩 Pay via Mobile Banking</h3>
+        <p id="bdPlanLabel" style="font-size:13.5px;color:var(--green);font-weight:700;margin-bottom:10px;"></p>
+
+        <div class="wallet-tabs">
+            <button type="button" class="wallet-tab is-active" data-wallet="bKash" onclick="selectWallet('bKash')">bKash</button>
+            <button type="button" class="wallet-tab" data-wallet="Nagad" onclick="selectWallet('Nagad')">Nagad</button>
+            <button type="button" class="wallet-tab" data-wallet="Rocket" onclick="selectWallet('Rocket')">Rocket</button>
+        </div>
+
+        <div class="wallet-info-card">
+            <div>
+                <small style="display:block;color:var(--muted);font-size:11.5px;font-weight:600;">SEND MONEY (PERSONAL) TO:</small>
+                <strong id="activeWalletNumber" style="font-size:18px;color:var(--navy);letter-spacing:0.5px;">01700000000</strong>
+            </div>
+            <button type="button" class="copy-btn" onclick="copyWalletNumber()">📋 Copy</button>
+        </div>
+
+        <div id="bdInlineError" class="cf-inline-error"></div>
+
+        <div class="cf-field">
+            <label for="bdTrx">Transaction ID (TrxID)</label>
+            <input type="text" id="bdTrx" placeholder="e.g., BGD89X2K1P">
+        </div>
+        <div class="cf-field">
+            <label for="bdEmail">Your Email (For Plugin &amp; Key Delivery)</label>
+            <input type="email" id="bdEmail" placeholder="you@example.com">
+        </div>
+        <div class="cf-field">
+            <label for="bdDomain">Your Store Domain</label>
+            <input type="text" id="bdDomain" placeholder="e.g., yourstore.com">
+        </div>
+
+        <button type="button" class="btn-primary" style="width:100%;margin-top:6px;" onclick="submitBdOrder()">💬 Verify &amp; Get Plugin on WhatsApp</button>
+    </div>
+</div>
+
+<!-- Pro Legal Policy Modal -->
+<div id="legalModal" class="cf-modal-overlay" role="dialog" aria-modal="true">
+    <div class="cf-modal-box">
+        <button type="button" class="cf-modal-close" onclick="closeModal('legalModal')" aria-label="Close">&times;</button>
+        <h3 id="legalTitle" style="color:var(--navy);font-size:20px;margin-bottom:12px;"></h3>
+        <div id="legalBody" style="font-size:14px;color:var(--text);line-height:1.7;"></div>
+    </div>
+</div>
+
+<div id="cfToast" class="cf-toast"></div>
+
+<script>
+    // ========================================================
+    // বস, শুধু এই CONFIG অংশে আপনার আসল নম্বর ও লিংক বসাবেন
+    // ========================================================
+    const CONFIG = {
+        whatsappNumber: '8801700000000',
+        wallets: {
+            bKash: '01700000000',
+            Nagad: '01700000000',
+            Rocket: '01700000000'
+        },
+        lemonLink1Site: 'https://cartfend.lemonsqueezy.com/checkout',
+        lemonLink5Sites: 'https://cartfend.lemonsqueezy.com/checkout',
+        lemonLink20Sites: 'https://cartfend.lemonsqueezy.com/checkout'
+    };
+
+    document.getElementById('ls-link-1').href = CONFIG.lemonLink1Site;
+    document.getElementById('ls-link-5').href = CONFIG.lemonLink5Sites;
+    document.getElementById('ls-link-20').href = CONFIG.lemonLink20Sites;
+    document.getElementById('footerWaLink').href = 'https://wa.me/' + CONFIG.whatsappNumber;
+
+    let selectedPlan = '';
+    let selectedWallet = 'bKash';
+
+    function toggleMobileMenu() {
+        document.getElementById('mainNav').classList.toggle('is-open');
+    }
+
+    function setCurrency(curr, btnEl) {
+        document.querySelectorAll('.curr-btn').forEach(b => b.classList.remove('is-active'));
+        btnEl.classList.add('is-active');
+
+        document.querySelectorAll('.plan-price').forEach(el => {
+            const val = curr === 'BDT' ? el.getAttribute('data-bdt') : el.getAttribute('data-usd');
+            el.innerHTML = val + ' <span>/ Lifetime</span>';
+        });
+        document.querySelectorAll('.plan-alt-price').forEach(el => {
+            el.textContent = curr === 'BDT' ? el.getAttribute('data-bdt') : el.getAttribute('data-usd');
+        });
+    }
+
+    function openBdModal(planName, priceText) {
+        selectedPlan = planName + ' (' + priceText + ')';
+        document.getElementById('bdPlanLabel').textContent = selectedPlan;
+        document.getElementById('bdInlineError').style.display = 'none';
+        selectWallet('bKash');
+        document.getElementById('bdModal').style.display = 'flex';
+    }
+
+    function selectWallet(wallet) {
+        selectedWallet = wallet;
+        document.querySelectorAll('.wallet-tab').forEach(t => {
+            t.classList.toggle('is-active', t.getAttribute('data-wallet') === wallet);
+        });
+        document.getElementById('activeWalletNumber').textContent = CONFIG.wallets[wallet] || '';
+    }
+
+    function copyWalletNumber() {
+        const num = document.getElementById('activeWalletNumber').textContent;
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(num);
+        }
+        showToast('✓ ' + selectedWallet + ' number copied: ' + num);
+    }
+
+    function submitBdOrder() {
+        const trx = document.getElementById('bdTrx').value.trim();
+        const email = document.getElementById('bdEmail').value.trim();
+        const domain = document.getElementById('bdDomain').value.trim();
+        const errBox = document.getElementById('bdInlineError');
+
+        if (!trx || !email || !domain) {
+            errBox.textContent = 'Please fill in your Transaction ID (TrxID), Email, and Store Domain.';
+            errBox.style.display = 'block';
+            return;
+        }
+        errBox.style.display = 'none';
+
+        const msg = `Hello CartFend Team! I have completed payment:\n• Plan: ${selectedPlan}\n• Method: ${selectedWallet}\n• TrxID: ${trx}\n• Email: ${email}\n• Domain: ${domain}\nPlease send my CartFend plugin zip & license key.`;
+        window.open('https://wa.me/' + CONFIG.whatsappNumber + '?text=' + encodeURIComponent(msg), '_blank');
+    }
+
+    const LEGAL_DOCS = {
+        privacy: {
+            title: 'Privacy Policy',
+            body: '<p>CartFend respects your privacy. We only collect the email address and store domain required to issue and verify your commercial software license. All fraud logs, fingerprints, and incomplete leads captured by the plugin stay strictly inside your own WordPress database.</p>'
+        },
+        terms: {
+            title: 'Terms of Service',
+            body: '<p>Each CartFend Lifetime License grants you lifetime updates and usage rights according to your purchased site limit (1, 5, or 20 websites). Redistribution, reselling, or sharing license keys publicly is strictly prohibited.</p>'
+        },
+        refund: {
+            title: '7-Day Refund Policy',
+            body: '<p>We offer a hassle-free 7-day money-back guarantee if CartFend experiences a verified technical conflict on your WooCommerce store that our support team is unable to resolve within 48 hours.</p>'
+        }
+    };
+
+    function openLegalModal(type) {
+        const doc = LEGAL_DOCS[type];
+        if (!doc) return;
+        document.getElementById('legalTitle').textContent = doc.title;
+        document.getElementById('legalBody').innerHTML = doc.body;
+        document.getElementById('legalModal').style.display = 'flex';
+    }
+
+    function closeModal(id) {
+        document.getElementById(id).style.display = 'none';
+    }
+
+    function showToast(msg) {
+        const t = document.getElementById('cfToast');
+        t.textContent = msg;
+        t.style.display = 'block';
+        setTimeout(() => { t.style.display = 'none'; }, 2800);
+    }
+
+    window.addEventListener('click', function (e) {
+        if (e.target.classList.contains('cf-modal-overlay')) {
+            e.target.style.display = 'none';
+        }
+    });
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+            closeModal('bdModal');
+            closeModal('legalModal');
+        }
+    });
+</script>
+</body>
+</html>
